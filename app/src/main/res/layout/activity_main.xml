@@ -11,5 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="onScrollBy"
+        android:text="scrollBy"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="onTranslate"
+        android:text="translate"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="onStartAnimation"
+        android:text="animation"/>
+
 
 </RelativeLayout>
