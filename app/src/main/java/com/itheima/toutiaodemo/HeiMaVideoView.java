@@ -73,7 +73,7 @@ public class HeiMaVideoView extends TextureView {
     };
 
 
-    public void play() {
+    public void start() {
         try {
             mMediaPlayer.setDataSource(getContext(), Uri.parse(mUrl));
             mMediaPlayer.prepareAsync();
@@ -84,5 +84,13 @@ public class HeiMaVideoView extends TextureView {
 
     public void stop() {
         mMediaPlayer.stop();
+    }
+
+    public void pause() {
+        mMediaPlayer.pause();
+    }
+
+    public void play() {
+        mMediaPlayer.start();
     }
 }

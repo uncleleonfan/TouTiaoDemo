@@ -21,9 +21,11 @@ public class VideoListItemView extends RelativeLayout {
 
     private ImageView mCover;
 
+
+    private static final int STATE_IDLE = 0;
     private static final int STATE_PLAYING = 1;
-    private static final int STATE_STOP = 2;
-    private int mState = STATE_STOP;
+    private static final int STATE_PAUSE = 2;
+    private int mState = STATE_IDLE;
 
     public VideoListItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -41,29 +43,53 @@ public class VideoListItemView extends RelativeLayout {
         mStart = (ImageView) findViewById(R.id.start);
         mCover = (ImageView) findViewById(R.id.cover);
         mStart.setOnClickListener(mOnClickListener);
+        mHeiMaVideoView.setOnClickListener(mOnClickListener);
     }
 
     private OnClickListener mOnClickListener = new OnClickListener() {
 
         @Override
         public void onClick(View v) {
-            if (mState == STATE_STOP) {
-                play();
+            switch (v.getId()) {
+                case R.id.start:
+                    if (mState == STATE_IDLE) {
+                        start();
+                    } else if (mState == STATE_PAUSE){
+                        play();
+                    }
+                    break;
+                case R.id.heima_video_view:
+                    if (mState == STATE_PLAYING) {
+                        pause();
+                    }
             }
         }
     };
 
-    public void play() {
-        mState = STATE_PLAYING;
-        mHeiMaVideoView.play();
-        mCover.setVisibility(GONE);
-        mStart.setVisibility(GONE);
+    public void start() {
+        if (mState == STATE_IDLE) {
+            mState = STATE_PLAYING;
+            mHeiMaVideoView.start();
+            mCover.setVisibility(GONE);
+            mStart.setVisibility(GONE);
+        }
     }
 
-    public void stop() {
-        mState = STATE_STOP;
-        mHeiMaVideoView.stop();
-        mStart.setVisibility(VISIBLE);
+    public void play() {
+        if (mState == STATE_PAUSE) {
+            mState = STATE_PLAYING;
+            mStart.setVisibility(GONE);
+            mHeiMaVideoView.play();
+        }
+    }
+
+
+    public void pause() {
+        if (mState == STATE_PLAYING) {
+            mState = STATE_PAUSE;
+            mHeiMaVideoView.pause();
+            mStart.setVisibility(VISIBLE);
+        }
     }
 
     public void setVideoPath(String url) {
