@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="180dp">
+
+    <com.itheima.toutiaodemo.HeiMaVideoView
+        android:id="@+id/heima_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageView
+        android:id="@+id/cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/cover"
+        android:scaleType="fitXY"/>
+
+    <ImageView
+        android:id="@+id/start"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:background="@mipmap/play_icon"/>
+
+</RelativeLayout>

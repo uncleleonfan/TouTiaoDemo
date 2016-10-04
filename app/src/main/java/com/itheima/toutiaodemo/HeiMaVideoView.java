@@ -42,12 +42,6 @@ public class HeiMaVideoView extends TextureView {
                 mMediaPlayer.setScreenOnWhilePlaying(true);
                 mMediaPlayer.setSurface(new Surface(surface));
             }
-            try {
-                mMediaPlayer.setDataSource(getContext(), Uri.parse(mUrl));
-                mMediaPlayer.prepareAsync();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
         @Override
@@ -79,6 +73,16 @@ public class HeiMaVideoView extends TextureView {
     };
 
 
+    public void play() {
+        try {
+            mMediaPlayer.setDataSource(getContext(), Uri.parse(mUrl));
+            mMediaPlayer.prepareAsync();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-
+    public void stop() {
+        mMediaPlayer.stop();
+    }
 }
