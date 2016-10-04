@@ -9,6 +9,12 @@
     <VideoView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:visibility="gone"/>
+
+    <com.itheima.toutiaodemo.HeiMaVideoView
+        android:id="@+id/heima_video_view"
+        android:layout_width="match_parent"
         android:layout_height="180dp"/>
 
     <Button
