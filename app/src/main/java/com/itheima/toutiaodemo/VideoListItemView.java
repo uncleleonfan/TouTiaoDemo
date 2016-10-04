@@ -1,10 +1,12 @@
 package com.itheima.toutiaodemo;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 /**
@@ -20,6 +22,8 @@ public class VideoListItemView extends RelativeLayout {
     private ImageView mStart;
 
     private ImageView mCover;
+
+    private ProgressBar mProgressBar;
 
 
     private static final int STATE_IDLE = 0;
@@ -42,9 +46,19 @@ public class VideoListItemView extends RelativeLayout {
         mHeiMaVideoView = (HeiMaVideoView) findViewById(R.id.heima_video_view);
         mStart = (ImageView) findViewById(R.id.start);
         mCover = (ImageView) findViewById(R.id.cover);
+        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
         mStart.setOnClickListener(mOnClickListener);
         mHeiMaVideoView.setOnClickListener(mOnClickListener);
+        mHeiMaVideoView.setOnPreparedListener(mOnPreparedListener);
     }
+
+
+    private MediaPlayer.OnPreparedListener mOnPreparedListener = new MediaPlayer.OnPreparedListener() {
+        @Override
+        public void onPrepared(MediaPlayer mp) {
+            mProgressBar.setVisibility(GONE);
+        }
+    };
 
     private OnClickListener mOnClickListener = new OnClickListener() {
 
@@ -72,6 +86,7 @@ public class VideoListItemView extends RelativeLayout {
             mHeiMaVideoView.start();
             mCover.setVisibility(GONE);
             mStart.setVisibility(GONE);
+            mProgressBar.setVisibility(VISIBLE);
         }
     }
 

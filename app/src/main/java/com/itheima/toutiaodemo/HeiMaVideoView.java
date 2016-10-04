@@ -23,6 +23,8 @@ public class HeiMaVideoView extends TextureView {
     private MediaPlayer mMediaPlayer;
     private String mUrl;
 
+    private MediaPlayer.OnPreparedListener mOnPreparedListener;
+
     public HeiMaVideoView(Context context) {
         this(context, null);
     }
@@ -37,7 +39,7 @@ public class HeiMaVideoView extends TextureView {
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
             if (mMediaPlayer == null) {
                 mMediaPlayer = new MediaPlayer();
-                mMediaPlayer.setOnPreparedListener(mOnPreparedListener);
+                mMediaPlayer.setOnPreparedListener(mPreparedListener);
                 mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 mMediaPlayer.setScreenOnWhilePlaying(true);
                 mMediaPlayer.setSurface(new Surface(surface));
@@ -65,10 +67,13 @@ public class HeiMaVideoView extends TextureView {
         mUrl = url;
     }
 
-    private MediaPlayer.OnPreparedListener mOnPreparedListener = new MediaPlayer.OnPreparedListener() {
+    private MediaPlayer.OnPreparedListener mPreparedListener = new MediaPlayer.OnPreparedListener() {
         @Override
         public void onPrepared(MediaPlayer mp) {
             mMediaPlayer.start();
+            if (mOnPreparedListener != null) {
+                mOnPreparedListener.onPrepared(mp);
+            }
         }
     };
 
@@ -93,4 +98,9 @@ public class HeiMaVideoView extends TextureView {
     public void play() {
         mMediaPlayer.start();
     }
+
+    public void setOnPreparedListener(MediaPlayer.OnPreparedListener l) {
+        mOnPreparedListener = l;
+    }
+
 }
